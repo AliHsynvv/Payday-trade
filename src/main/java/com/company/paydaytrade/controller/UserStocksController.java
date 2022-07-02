@@ -29,12 +29,14 @@ public class UserStocksController {
     }
 
     @PostMapping("/buy/{id}")
-    public ResponseEntity<ResponseDto> buyStockTargetPrice(@PathVariable Integer id, @RequestBody BuyUserStockRequest buyUserStockRequest) throws IOException {
+    public ResponseEntity<ResponseDto> buyStockTargetPrice(@PathVariable Integer id, @RequestBody BuyUserStockRequest
+            buyUserStockRequest) throws IOException {
         return ResponseEntity.ok(ResponseDto.of(userStocksService.buyStockTargetPrice(id, buyUserStockRequest)));
     }
 
     @PutMapping("/sell/{id}")
-    public ResponseEntity<ResponseDto> sellStockTargetPrice(@PathVariable Integer id, @RequestBody SellUserStockRequest sellUserStockRequest) throws IOException {
+    public ResponseEntity<ResponseDto> sellStockTargetPrice(@PathVariable Integer id, @RequestBody SellUserStockRequest
+            sellUserStockRequest) throws IOException {
         return ResponseEntity.ok(ResponseDto.of(userStocksService.sellTargetPrice(id, sellUserStockRequest)));
     }
 }

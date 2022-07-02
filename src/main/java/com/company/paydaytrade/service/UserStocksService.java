@@ -73,7 +73,8 @@ public class UserStocksService {
         double stockPriceDouble = stockPrice.doubleValue();
         Optional<UserStocks> userStocksOptional = userStocksRepository.findUserStocksByUserId(id);
         userOptional.ifPresent(user -> userStocksOptional.ifPresent(userStocks -> {
-            if (userStocks.getStockName().equals(sellUserStockRequest.getStockName()) || userStocks.getStockPrice() >= sellUserStockRequest.getTargetValue() || stockPriceDouble==sellUserStockRequest.getTargetValue()) {
+            if (userStocks.getStockName().equals(sellUserStockRequest.getStockName()) || userStocks.getStockPrice() >=
+                    sellUserStockRequest.getTargetValue() || stockPriceDouble==sellUserStockRequest.getTargetValue()) {
                 Double userCash = user.getCash();
                 Double targetCash = sellUserStockRequest.getTargetValue();
                 Double finalCash = userCash + targetCash;
@@ -81,7 +82,8 @@ public class UserStocksService {
                 userRepository.save(user);
                 userStocks.setStockPrice(userStocks.getStockPrice() - sellUserStockRequest.getTargetValue());
                 userStocksRepository.save(userStocks);
-                emailSenderService.sendEmail(user.getEmail(), "PaydayTrade", "The process of selling " + sellUserStockRequest.getStockName() + " shares stock was successfully completed");
+                emailSenderService.sendEmail(user.getEmail(), "PaydayTrade", "The process of selling " +
+                        sellUserStockRequest.getStockName() + " shares stock was successfully completed");
             }
         }));
 

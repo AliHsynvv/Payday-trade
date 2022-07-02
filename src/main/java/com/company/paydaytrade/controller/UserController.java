@@ -23,11 +23,13 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<ResponseDto> createUser(@RequestBody CreateUserRequest createUserRequest) {
-        return ResponseEntity.ok(ResponseDto.of(userService.createUser(createUserRequest), "User succesfully created"));
+        return ResponseEntity.ok(ResponseDto.of(userService.createUser(createUserRequest),
+                "User succesfully created"));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto> updateUser(@PathVariable Integer id, @RequestBody UpdateUserRequest updateUserRequest) {
+    public ResponseEntity<ResponseDto> updateUser(@PathVariable Integer id,
+                                                  @RequestBody UpdateUserRequest updateUserRequest) {
         return ResponseEntity.ok(ResponseDto.of(userService.updateUser(id, updateUserRequest)));
     }
 
@@ -48,7 +50,8 @@ public class UserController {
     }
 
     @PutMapping("/deposit/{id}")
-    public ResponseEntity<ResponseDto> loadCash(@PathVariable Integer id, @RequestBody DepositUserRequest depositUserRequest) {
+    public ResponseEntity<ResponseDto> loadCash(@PathVariable Integer id,
+                                                @RequestBody DepositUserRequest depositUserRequest) {
         return ResponseEntity.ok(ResponseDto.of(userService.loadCash(id, depositUserRequest)));
     }
 
