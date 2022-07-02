@@ -38,6 +38,7 @@ public class PaydayTradeApplication {
 
             @Override
             public void run(String[] args) throws IOException {
+                PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
             }
         };
