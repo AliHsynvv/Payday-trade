@@ -9,12 +9,10 @@ import com.company.paydaytrade.entity.UserStocks;
 import com.company.paydaytrade.exception.UserStockNotFoundException;
 import com.company.paydaytrade.repository.UserRepository;
 import com.company.paydaytrade.repository.UserStocksRepository;
-import org.apache.naming.factory.SendMailFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -22,15 +20,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserStocksService {
-    @Autowired
-    UserStocksRepository userStocksRepository;
-    @Autowired
-    UserStocksDtoConverter userStocksDtoConverter;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    EmailSenderService emailSenderService;
+    private final UserStocksRepository userStocksRepository;
+    private final UserStocksDtoConverter userStocksDtoConverter;
+    private final UserRepository userRepository;
+    private final EmailSenderService emailSenderService;
 
     public List<UserStocksDto> getAllUserStocks() {
         List<UserStocks> userStocks = userStocksRepository.findAll();
@@ -42,7 +37,8 @@ public class UserStocksService {
     }
 
     public UserStocks findUserStocksByUserId(Integer id) {
-        return userStocksRepository.findUserStocksByUserId(id).orElseThrow(() -> new UserStockNotFoundException("User stock not found"));
+        return userStocksRepository.findUserStocksByUserId(id)
+                .orElseThrow(() -> new UserStockNotFoundException("User stock not found"));
     }
 
     public UserStocksDto buyStockTargetPrice(Integer id, BuyUserStockRequest buyUserStockRequest) throws IOException {
@@ -63,7 +59,8 @@ public class UserStocksService {
                     userStocks.setStockPrice(stockPriceDouble);
                     userRepository.save(usr);
                     userStocksRepository.save(userStocks);
-                    emailSenderService.sendEmail(usr.getEmail(), "PaydayTrade", "The process of purchasing " + buyUserStockRequest.getStockName() + " stock was successfully completed");
+                    emailSenderService.sendEmail(usr.getEmail(), "PaydayTrade", "The process of purchasing "
+                            + buyUserStockRequest.getStockName() + " stock was successfully completed");
                 }
             }
         });

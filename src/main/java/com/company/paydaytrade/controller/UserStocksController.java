@@ -4,18 +4,18 @@ import com.company.paydaytrade.dto.BuyUserStockRequest;
 import com.company.paydaytrade.dto.ResponseDto;
 import com.company.paydaytrade.dto.SellUserStockRequest;
 import com.company.paydaytrade.service.UserStocksService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/paydaytrade/user/stocks")
 public class UserStocksController {
 
-    @Autowired
-    UserStocksService userStocksService;
+    private final UserStocksService userStocksService;
 
     @GetMapping
     public ResponseEntity<ResponseDto> getAllUserStocks() {
@@ -28,8 +28,8 @@ public class UserStocksController {
 
     }
 
-    @PutMapping("/buy/{id}")
-    public ResponseEntity<ResponseDto> buyStockTargetPrice(@PathVariable Integer id,@RequestBody BuyUserStockRequest buyUserStockRequest) throws IOException {
+    @PostMapping("/buy/{id}")
+    public ResponseEntity<ResponseDto> buyStockTargetPrice(@PathVariable Integer id, @RequestBody BuyUserStockRequest buyUserStockRequest) throws IOException {
         return ResponseEntity.ok(ResponseDto.of(userStocksService.buyStockTargetPrice(id, buyUserStockRequest)));
     }
 

@@ -5,15 +5,16 @@ import com.company.paydaytrade.dto.DepositUserRequest;
 import com.company.paydaytrade.dto.ResponseDto;
 import com.company.paydaytrade.dto.UpdateUserRequest;
 import com.company.paydaytrade.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/paydaytrade/user")
 public class UserController {
-    @Autowired
-    UserService userService;
+
+    private final UserService userService;
 
     @GetMapping
     public ResponseEntity<ResponseDto> getAllUser() {

@@ -1,14 +1,14 @@
 package com.company.paydaytrade.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class EmailSenderService {
-    @Autowired
-    JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     public void sendEmail(String toEmail,
                           String subject,
@@ -19,6 +19,6 @@ public class EmailSenderService {
         message.setText(body);
         message.setSubject(subject);
         javaMailSender.send(message);
-        System.out.println("mail sent succesfully");
+        System.out.println("mail sent successfully");
     }
 }
