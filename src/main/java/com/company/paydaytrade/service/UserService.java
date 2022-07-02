@@ -4,7 +4,6 @@ import com.company.paydaytrade.dto.*;
 import com.company.paydaytrade.entity.User;
 import com.company.paydaytrade.exception.UserNotFoundException;
 import com.company.paydaytrade.repository.UserRepository;
-import com.company.paydaytrade.repository.UserStocksRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,9 +18,8 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final UserDtoConverter userDtoConverter;
-    private final UserStocksRepository userStocksRepository;
 
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public List<UserDto> getAllUser() {
         List<User> userList = userRepository.findAll();

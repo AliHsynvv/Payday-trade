@@ -23,7 +23,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserStocksService {
     private final UserStocksRepository userStocksRepository;
-    private final UserStocksDtoConverter userStocksDtoConverter;
     private final UserRepository userRepository;
     private final EmailSenderService emailSenderService;
 
@@ -31,7 +30,7 @@ public class UserStocksService {
         List<UserStocks> userStocks = userStocksRepository.findAll();
         List<UserStocksDto> userStocksDtoList = new ArrayList<>();
         for (UserStocks us : userStocks) {
-            userStocksDtoList.add(userStocksDtoConverter.converter(us));
+            userStocksDtoList.add(UserStocksDtoConverter.converter(us));
         }
         return userStocksDtoList;
     }
@@ -64,7 +63,7 @@ public class UserStocksService {
                 }
             }
         });
-        return userStocksDtoConverter.converter(userStocks);
+        return UserStocksDtoConverter.converter(userStocks);
     }
 
     public UserStocksDto sellTargetPrice(Integer id, SellUserStockRequest sellUserStockRequest) throws IOException {
@@ -73,20 +72,18 @@ public class UserStocksService {
         BigDecimal stockPrice = stock.getQuote().getPrice();
         double stockPriceDouble = stockPrice.doubleValue();
         Optional<UserStocks> userStocksOptional = userStocksRepository.findUserStocksByUserId(id);
-        userOptional.ifPresent(user -> {
-            userStocksOptional.ifPresent(userStocks -> {
-                if (userStocks.getStockName().equals(sellUserStockRequest.getStockName()) || userStocks.getStockPrice() >= sellUserStockRequest.getTargetValue() || stockPrice.equals(sellUserStockRequest.getTargetValue())) {
-                    Double userCash = user.getCash();
-                    Double targetCash = sellUserStockRequest.getTargetValue();
-                    Double finalCash = userCash + targetCash;
-                    user.setCash(finalCash);
-                    userRepository.save(user);
-                    userStocks.setStockPrice(userStocks.getStockPrice() - sellUserStockRequest.getTargetValue());
-                    userStocksRepository.save(userStocks);
-                    emailSenderService.sendEmail(user.getEmail(), "PaydayTrade", "The process of selling " + sellUserStockRequest.getStockName() + " shares stock was successfully completed");
-                }
-            });
-        });
+        userOptional.ifPresent(user -> userStocksOptional.ifPresent(userStocks -> {
+            if (userStocks.getStockName().equals(sellUserStockRequest.getStockName()) || userStocks.getStockPrice() >= sellUserStockRequest.getTargetValue() || stockPriceDouble==sellUserStockRequest.getTargetValue()) {
+                Double userCash = user.getCash();
+                Double targetCash = sellUserStockRequest.getTargetValue();
+                Double finalCash = userCash + targetCash;
+                user.setCash(finalCash);
+                userRepository.save(user);
+                userStocks.setStockPrice(userStocks.getStockPrice() - sellUserStockRequest.getTargetValue());
+                userStocksRepository.save(userStocks);
+                emailSenderService.sendEmail(user.getEmail(), "PaydayTrade", "The process of selling " + sellUserStockRequest.getStockName() + " shares stock was successfully completed");
+            }
+        }));
 
         return userStocksOptional.map(UserStocksDtoConverter::converter).orElse(new UserStocksDto());
     }
