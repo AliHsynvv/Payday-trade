@@ -7,6 +7,8 @@ import com.company.paydaytrade.exception.UserNotFoundException;
 import com.company.paydaytrade.repository.UserRepository;
 import com.company.paydaytrade.repository.UserStocksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class UserService {
     @Autowired
     UserStocksRepository userStocksRepository;
 
+    private PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+
     public List<UserDto> getAllUser() {
         List<User> userList = userRepository.findAll();
         List<UserDto> userDtoList = new ArrayList<>();
@@ -35,7 +39,7 @@ public class UserService {
         User u = User.builder()
                 .name(createUserRequest.getName())
                 .email(createUserRequest.getEmail())
-                .password(createUserRequest.getPassword())
+                .password(passwordEncoder.encode(createUserRequest.getPassword()))
                 .cash(0D)
                 .build();
         userRepository.save(u);
@@ -47,7 +51,7 @@ public class UserService {
         u.ifPresent(user -> {
             user.setEmail(updateUserRequest.getEmail());
             user.setName(updateUserRequest.getName());
-            user.setPassword(updateUserRequest.getPassword());
+            user.setPassword(passwordEncoder.encode(updateUserRequest.getPassword()));
             user.setCash(updateUserRequest.getCash());
             userRepository.save(user);
         });
