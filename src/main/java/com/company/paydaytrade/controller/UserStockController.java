@@ -1,9 +1,9 @@
 package com.company.paydaytrade.controller;
 
-import com.company.paydaytrade.dto.BuyUserStockRequest;
-import com.company.paydaytrade.dto.ResponseDto;
-import com.company.paydaytrade.dto.SellUserStockRequest;
-import com.company.paydaytrade.service.UserStocksService;
+import com.company.paydaytrade.dto.request.BuyUserStockRequest;
+import com.company.paydaytrade.dto.response.ResponseDto;
+import com.company.paydaytrade.dto.request.SellUserStockRequest;
+import com.company.paydaytrade.service.UserStockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +13,9 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/paydaytrade/user/stocks")
-public class UserStocksController {
+public class UserStockController {
 
-    private final UserStocksService userStocksService;
+    private final UserStockService userStocksService;
 
     @GetMapping
     public ResponseEntity<ResponseDto> getAllUserStocks() {
@@ -24,7 +24,7 @@ public class UserStocksController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDto> findUserStockByUserId(@PathVariable Integer id) {
-        return ResponseEntity.ok(ResponseDto.of(userStocksService.findUserStocksByUserId(id)));
+        return ResponseEntity.ok(ResponseDto.of(userStocksService.findUserStockByUserId(id)));
 
     }
 

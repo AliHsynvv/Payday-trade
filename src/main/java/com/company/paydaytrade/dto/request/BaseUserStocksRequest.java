@@ -1,15 +1,13 @@
-package com.company.paydaytrade.dto;
+package com.company.paydaytrade.dto.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class UserStocksDto {
+public class BaseUserStocksRequest {
     private String stockName;
     private Double stockPrice;
     private Integer userId;

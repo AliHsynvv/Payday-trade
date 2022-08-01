@@ -13,5 +13,4 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
 
     Optional<User> findUserById(Integer id);
 
-
 }

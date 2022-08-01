@@ -1,4 +1,4 @@
-package com.company.paydaytrade.dto;
+package com.company.paydaytrade.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateUserRequest extends BaseUserRequest {
+public class SellUserStockRequest extends BaseUserStocksRequest {
     private Integer id;
+    private Double targetValue;
 }

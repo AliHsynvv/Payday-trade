@@ -14,7 +14,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @Table(name = "user_stocks", schema = "payday_trade")
-public class UserStocks implements Serializable {
+public class UserStock implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")

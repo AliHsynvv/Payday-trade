@@ -1,8 +1,8 @@
-package com.company.paydaytrade.dto;
+package com.company.paydaytrade.util;
 
+import com.company.paydaytrade.dto.UserDto;
 import com.company.paydaytrade.entity.User;
 import org.springframework.stereotype.Component;
-
 @Component
 public class UserDtoConverter {
     public UserDto converter(User u) {
@@ -14,5 +14,4 @@ public class UserDtoConverter {
                 .build();
         return userDto;
     }
-
 }

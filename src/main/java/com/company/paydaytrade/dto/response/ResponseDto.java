@@ -1,4 +1,7 @@
-package com.company.paydaytrade.dto;
+package com.company.paydaytrade.dto.response;
+
+import org.springframework.stereotype.Component;
+
 public class ResponseDto {
 
         private Integer errorCode;

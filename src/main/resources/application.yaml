@@ -1,0 +1,20 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: PaydayTrade
+  datasource:
+    url: jdbc:mysql://localhost:3306/payday_trade
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1233211234
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: gsynvali@gmail.com
+    password: cd
+    properties:
+      mail:
+        smtp:
+          starttls: true
+          auth: true

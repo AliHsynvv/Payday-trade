@@ -1,4 +1,4 @@
-package com.company.paydaytrade.dto;
+package com.company.paydaytrade.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,5 +12,4 @@ public class BaseUserRequest {
     private String password;
     private Double cash;
     private String email;
-
 }
