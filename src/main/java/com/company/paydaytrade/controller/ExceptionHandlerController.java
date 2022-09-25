@@ -12,6 +12,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 @RestControllerAdvice
 public class ExceptionHandlerController {
+
     @ExceptionHandler(CustomNotFoundRestException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleCustomNotFoundException(CustomNotFoundRestException exception) {

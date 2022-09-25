@@ -7,7 +7,6 @@ import com.company.paydaytrade.dto.request.UpdateUserRequest;
 import com.company.paydaytrade.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,8 +18,8 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping()
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/user")
+//    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<ResponseDto> getAllUser() {
         return ResponseEntity.ok(ResponseDto.of(userService.getAllUser()));
     }

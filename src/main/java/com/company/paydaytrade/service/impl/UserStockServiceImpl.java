@@ -8,7 +8,6 @@ import com.company.paydaytrade.entity.User;
 import com.company.paydaytrade.entity.UserStock;
 import com.company.paydaytrade.enums.ErrorCodeEnum;
 import com.company.paydaytrade.exception.CustomNotFoundRestException;
-import com.company.paydaytrade.exception.UserStockNotFoundException;
 import com.company.paydaytrade.repository.UserRepository;
 import com.company.paydaytrade.repository.UserStocksRepository;
 import com.company.paydaytrade.service.UserStockService;

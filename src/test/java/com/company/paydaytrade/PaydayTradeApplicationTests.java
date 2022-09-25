@@ -1,14 +1,14 @@
 package com.company.paydaytrade;
 
-import com.company.paydaytrade.dto.request.BuyUserStockRequest;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.IOException;
 
-@SpringBootTest
-@RequiredArgsConstructor
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 class PaydayTradeApplicationTests {
 
     @Test

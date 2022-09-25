@@ -14,7 +14,6 @@ import java.io.IOException;
 public class StockController {
 
     private final YahooStockApiServiceImpl yahooStockApiServiceImpl;
-
     @GetMapping("/{stockName}")
     public ResponseEntity<ResponseDto> getStock(@PathVariable String stockName) throws IOException {
         return ResponseEntity.ok(ResponseDto.of(yahooStockApiServiceImpl.getStock(stockName)));

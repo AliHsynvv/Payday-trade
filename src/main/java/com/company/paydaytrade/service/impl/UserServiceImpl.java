@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
                 .name(createUserRequest.getName())
                 .email(createUserRequest.getEmail())
                 .password(passwordEncoder.encode(createUserRequest.getPassword()))
-                .cash(0D)
+                .cash(createUserRequest.getCash())
                 .build();
         userRepository.save(u);
         return userDtoConverter.converter(u);
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
             user.setCash(updateUserRequest.getCash());
             userRepository.save(user);
         });
-        return u.map(userDtoConverter::converter).orElse(new UserDto());
+        return u.map(userDtoConverter::converter).orElse( new UserDto());
     }
 
     @Override
